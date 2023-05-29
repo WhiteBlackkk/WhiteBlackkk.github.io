@@ -166,10 +166,198 @@
 <p>当然目前现有的视频播放软件都可以实现这个功能。但为什么还要再自己写一个呢？ 原因很简单。因为现有软件的这个功能并不能实现批量化。例如一个文件夹中有很多个视频，如果利用现有软件剧情连拍，必须一个个打开，然后生成。 对于有很多个视频文件而言，显然是不能忍受的。</p>
 <p>所以写了两个脚本文件，一个是内容预览生成程序，一个是批量调用程序。项目传到了Github上，<a target="_blank" rel="noopener" href="https://github.com/zhaoxuhui/VideoPreviewer">https://github.com/zhaoxuhui/VideoPreviewer</a>。 代码不多，在这里也贴一下。分别写了python2和python3两个版本，这里仅贴pyhon2版本的，python3版本的可以去github看。</p>
 <p>内容预览生成程序 preivewer.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br><span class="line">from PIL import Image, ImageDraw, ImageFont</span><br><span class="line">import time</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 批量保存关键帧，这里没用到</span><br><span class="line">def saveImages(images, indices, out_path):</span><br><span class="line">    for i in range(images.__len__()):</span><br><span class="line">        cv2.imwrite(out_path + &quot;\\&quot; + &quot;%05d&quot; % (indices[i]) + &quot;.jpg&quot;, images[i])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 批量给关键帧添加时间戳</span><br><span class="line">def txtImages(images, frames_save, frames, fps):</span><br><span class="line">    for i in range(images.__len__()):</span><br><span class="line">        txt = (frames_save[i] * 1.0 / frames) * (frames * 1.0 / fps)</span><br><span class="line"></span><br><span class="line">        m, s = divmod(txt, 60)</span><br><span class="line">        h, m = divmod(m, 60)</span><br><span class="line"></span><br><span class="line">        cv2.putText(images[i],</span><br><span class="line">                    &quot;%02d:%02d:%02d&quot; % (h, m, s),</span><br><span class="line">                    (10, 25),</span><br><span class="line">                    cv2.FONT_HERSHEY_SIMPLEX,</span><br><span class="line">                    0.6,</span><br><span class="line">                    (255, 255, 255),</span><br><span class="line">                    2,</span><br><span class="line">                    cv2.LINE_AA)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">max_width = 400</span><br><span class="line">num_sample = 16</span><br><span class="line">cols = 4</span><br><span class="line">rows = 4</span><br><span class="line">interval = 20</span><br><span class="line">margin = 20</span><br><span class="line">top = 100</span><br><span class="line">bottom = 30</span><br><span class="line">out_path = &quot;content.jpg&quot;</span><br><span class="line"></span><br><span class="line"># 程序启动逻辑</span><br><span class="line"># 如果启动时没有参数，则启动后手动输入参数</span><br><span class="line"># 如果启动时有一个参数，默认缩略图大小为400</span><br><span class="line"># 如果启动时有两个参数，输出文件名为默认</span><br><span class="line"># 如果启动时有三个参数，则按照指定参数运行</span><br><span class="line"># 否则，报错退出，并给出运行提示</span><br><span class="line">if sys.argv.__len__() == 1:</span><br><span class="line">    # 输入需要处理的视频文件</span><br><span class="line">    video_path = raw_input(&quot;Input path of video:\n&quot;)</span><br><span class="line"></span><br><span class="line">    # 输入视频每一帧的缩略图大小，默认为400</span><br><span class="line">    input_width = raw_input(&quot;Input width for frame thumbnail(press &#x27;d&#x27; use 400 as default):&quot;)</span><br><span class="line">    if input_width == &quot;d&quot;:</span><br><span class="line">        max_width = 400</span><br><span class="line">    else:</span><br><span class="line">        max_width = int(input_width)</span><br><span class="line">    out_path = raw_input(&quot;Input the name of output jpg file(press &#x27;d&#x27; use &#x27;content.jpg&#x27; as default):&quot;)</span><br><span class="line">    if out_path == &quot;d&quot;:</span><br><span class="line">        out_path = &#x27;content.jpg&#x27;</span><br><span class="line">elif sys.argv.__len__() == 2:</span><br><span class="line">    video_path = sys.argv[1]</span><br><span class="line">    max_width = 400</span><br><span class="line">elif sys.argv.__len__() == 3:</span><br><span class="line">    video_path = sys.argv[1]</span><br><span class="line">    max_width = int(sys.argv[2])</span><br><span class="line">elif sys.argv.__len__() == 4:</span><br><span class="line">    video_path = sys.argv[1]</span><br><span class="line">    max_width = int(sys.argv[2])</span><br><span class="line">    out_path = sys.argv[3]</span><br><span class="line">else:</span><br><span class="line">    print &quot;Wrong params.&quot;</span><br><span class="line">    print &quot;You can run the script directly with no params and input them manually later.\n&quot; \</span><br><span class="line">          &quot;Or you can give params to script before running using these following formats:\n&quot; \</span><br><span class="line">          &quot;[1]python script.py video_path\n&quot; \</span><br><span class="line">          &quot;[2]python script.py video_path thumbnail_width\n&quot; \</span><br><span class="line">          &quot;[3]python script.py video_path thumbnail_width out_filename&quot; \</span><br><span class="line">          &quot;If you don&#x27;t give the param &#x27;thumbnail_width&#x27; , it will be 400 as default.&quot; \</span><br><span class="line">          &quot;If you don&#x27;t give the param &#x27;out_filename&#x27;, it will be &#x27;content.jpg&#x27; as default.&quot;</span><br><span class="line">    exit()</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(video_path)</span><br><span class="line">frames = int(cap.get(7))</span><br><span class="line">fps = int(cap.get(5))</span><br><span class="line">video_width = int(cap.get(3))</span><br><span class="line">video_height = int(cap.get(4))</span><br><span class="line"></span><br><span class="line">print frames, &#x27;frames in total.&#x27;</span><br><span class="line"></span><br><span class="line">ratio = max_width * 1.0 / video_width</span><br><span class="line">delta_frame = int(frames / num_sample)</span><br><span class="line"></span><br><span class="line">frames_save = []</span><br><span class="line">images = []</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line"></span><br><span class="line">for i in range(num_sample):</span><br><span class="line">    i = i * delta_frame</span><br><span class="line">    frames_save.append(i)</span><br><span class="line"></span><br><span class="line">for item in frames_save:</span><br><span class="line">    cap.set(cv2.CAP_PROP_POS_FRAMES, item)</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    if frame is None:</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        images.append(cv2.resize(frame, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_LINEAR))</span><br><span class="line">        print &quot;processing...&quot;, round((item * 1.0 / frames) * 100, 2), &quot; %&quot;</span><br><span class="line"></span><br><span class="line"># 释放对象</span><br><span class="line">cap.release()</span><br><span class="line"></span><br><span class="line">txtImages(images, frames_save, frames, fps)</span><br><span class="line"></span><br><span class="line">max_height = images[0].shape[0]</span><br><span class="line"></span><br><span class="line">width = max_width * cols + interval * (cols - 1) + margin * 2</span><br><span class="line">height = max_height * rows + interval * (rows - 1) + margin * 2 + bottom</span><br><span class="line"></span><br><span class="line">result = np.zeros((height, width, 3), np.uint8) + 255</span><br><span class="line"></span><br><span class="line"># 输出文件相关信息</span><br><span class="line">info = Image.fromarray(np.zeros((top, width, 3), np.uint8) + 230)</span><br><span class="line">draw = ImageDraw.Draw(info)</span><br><span class="line">font = ImageFont.truetype(&#x27;hwxh.ttf&#x27;, 24)</span><br><span class="line">if sys.argv.__len__() == 1:</span><br><span class="line">    draw.text((1 * margin, 20), u&#x27;文件名：&#x27; + unicode(video_path.split(&quot;\\&quot;)[-1], &#x27;utf-8&#x27;), (0, 0, 0), font=font)</span><br><span class="line">else:</span><br><span class="line">    draw.text((1 * margin, 20), u&#x27;文件名：&#x27; + unicode(video_path.split(&quot;\\&quot;)[-1], &#x27;gbk&#x27;), (0, 0, 0), font=font)</span><br><span class="line">draw.text((1 * margin, 50), u&#x27;分辨率：&#x27; + video_width.__str__() + u&quot; × &quot; + video_height.__str__(), (0, 0, 0), font=font)</span><br><span class="line">draw.text((1 * margin + 1 * max_width, 50), u&#x27;时长：&#x27; + round(frames * 1.0 / fps, 3).__str__() + &quot; s&quot;, (0, 0, 0),</span><br><span class="line">          font=font)</span><br><span class="line">draw.text((3 * margin + 2 * max_width, 50), u&#x27;帧率：&#x27; + fps.__str__(), (0, 0, 0), font=font)</span><br><span class="line">draw.text((4 * margin + 3 * max_width, 50), u&#x27;帧计数：&#x27; + frames.__str__(), (0, 0, 0), font=font)</span><br><span class="line"></span><br><span class="line">for i in range(rows):</span><br><span class="line">    for j in range(cols):</span><br><span class="line">        result[margin + i * interval + i * max_height:margin + i * interval + i * max_height + max_height,</span><br><span class="line">        margin + j * interval + j * max_width:margin + j * interval + j * max_width + max_width] = \</span><br><span class="line">            images[i * 4 + j * 1]</span><br><span class="line"></span><br><span class="line">if width - 500 &lt;= 0:</span><br><span class="line">    loc_x = 0</span><br><span class="line">else:</span><br><span class="line">    loc_x = width - 500</span><br><span class="line"></span><br><span class="line">cv2.putText(result,</span><br><span class="line">            &quot;Created by video previewer written by Zhao Xuhui.&quot;,</span><br><span class="line">            (loc_x, height - 20),</span><br><span class="line">            cv2.FONT_HERSHEY_SIMPLEX,</span><br><span class="line">            0.6,</span><br><span class="line">            (0, 0, 0),</span><br><span class="line">            1,</span><br><span class="line">            cv2.LINE_AA)</span><br><span class="line"></span><br><span class="line">res = np.vstack([info, result])</span><br><span class="line">cv2.imwrite(out_path, res)</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"></span><br><span class="line">print &quot;process...finished.&quot;</span><br><span class="line">print &quot;Total time cost:&quot;, round(t2 - t1, 2), &quot;s&quot;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext"># coding=utf-8
+import cv2
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+import time
+import sys
+
+
+# 批量保存关键帧，这里没用到
+def saveImages(images, indices, out_path):
+    for i in range(images.__len__()):
+        cv2.imwrite(out_path + &quot;\\&quot; + &quot;%05d&quot; % (indices[i]) + &quot;.jpg&quot;, images[i])
+
+
+# 批量给关键帧添加时间戳
+def txtImages(images, frames_save, frames, fps):
+    for i in range(images.__len__()):
+        txt = (frames_save[i] * 1.0 / frames) * (frames * 1.0 / fps)
+
+        m, s = divmod(txt, 60)
+        h, m = divmod(m, 60)
+
+        cv2.putText(images[i],
+                    &quot;%02d:%02d:%02d&quot; % (h, m, s),
+                    (10, 25),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA)
+
+
+max_width = 400
+num_sample = 16
+cols = 4
+rows = 4
+interval = 20
+margin = 20
+top = 100
+bottom = 30
+out_path = &quot;content.jpg&quot;
+
+# 程序启动逻辑
+# 如果启动时没有参数，则启动后手动输入参数
+# 如果启动时有一个参数，默认缩略图大小为400
+# 如果启动时有两个参数，输出文件名为默认
+# 如果启动时有三个参数，则按照指定参数运行
+# 否则，报错退出，并给出运行提示
+if sys.argv.__len__() == 1:
+    # 输入需要处理的视频文件
+    video_path = raw_input(&quot;Input path of video:\n&quot;)
+
+    # 输入视频每一帧的缩略图大小，默认为400
+    input_width = raw_input(&quot;Input width for frame thumbnail(press &#x27;d&#x27; use 400 as default):&quot;)
+    if input_width == &quot;d&quot;:
+        max_width = 400
+    else:
+        max_width = int(input_width)
+    out_path = raw_input(&quot;Input the name of output jpg file(press &#x27;d&#x27; use &#x27;content.jpg&#x27; as default):&quot;)
+    if out_path == &quot;d&quot;:
+        out_path = &#x27;content.jpg&#x27;
+elif sys.argv.__len__() == 2:
+    video_path = sys.argv[1]
+    max_width = 400
+elif sys.argv.__len__() == 3:
+    video_path = sys.argv[1]
+    max_width = int(sys.argv[2])
+elif sys.argv.__len__() == 4:
+    video_path = sys.argv[1]
+    max_width = int(sys.argv[2])
+    out_path = sys.argv[3]
+else:
+    print &quot;Wrong params.&quot;
+    print &quot;You can run the script directly with no params and input them manually later.\n&quot; \
+          &quot;Or you can give params to script before running using these following formats:\n&quot; \
+          &quot;[1]python script.py video_path\n&quot; \
+          &quot;[2]python script.py video_path thumbnail_width\n&quot; \
+          &quot;[3]python script.py video_path thumbnail_width out_filename&quot; \
+          &quot;If you don&#x27;t give the param &#x27;thumbnail_width&#x27; , it will be 400 as default.&quot; \
+          &quot;If you don&#x27;t give the param &#x27;out_filename&#x27;, it will be &#x27;content.jpg&#x27; as default.&quot;
+    exit()
+
+cap = cv2.VideoCapture(video_path)
+frames = int(cap.get(7))
+fps = int(cap.get(5))
+video_width = int(cap.get(3))
+video_height = int(cap.get(4))
+
+print frames, &#x27;frames in total.&#x27;
+
+ratio = max_width * 1.0 / video_width
+delta_frame = int(frames / num_sample)
+
+frames_save = []
+images = []
+
+t1 = time.time()
+
+for i in range(num_sample):
+    i = i * delta_frame
+    frames_save.append(i)
+
+for item in frames_save:
+    cap.set(cv2.CAP_PROP_POS_FRAMES, item)
+    ret, frame = cap.read()
+    if frame is None:
+        break
+    else:
+        images.append(cv2.resize(frame, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_LINEAR))
+        print &quot;processing...&quot;, round((item * 1.0 / frames) * 100, 2), &quot; %&quot;
+
+# 释放对象
+cap.release()
+
+txtImages(images, frames_save, frames, fps)
+
+max_height = images[0].shape[0]
+
+width = max_width * cols + interval * (cols - 1) + margin * 2
+height = max_height * rows + interval * (rows - 1) + margin * 2 + bottom
+
+result = np.zeros((height, width, 3), np.uint8) + 255
+
+# 输出文件相关信息
+info = Image.fromarray(np.zeros((top, width, 3), np.uint8) + 230)
+draw = ImageDraw.Draw(info)
+font = ImageFont.truetype(&#x27;hwxh.ttf&#x27;, 24)
+if sys.argv.__len__() == 1:
+    draw.text((1 * margin, 20), u&#x27;文件名：&#x27; + unicode(video_path.split(&quot;\\&quot;)[-1], &#x27;utf-8&#x27;), (0, 0, 0), font=font)
+else:
+    draw.text((1 * margin, 20), u&#x27;文件名：&#x27; + unicode(video_path.split(&quot;\\&quot;)[-1], &#x27;gbk&#x27;), (0, 0, 0), font=font)
+draw.text((1 * margin, 50), u&#x27;分辨率：&#x27; + video_width.__str__() + u&quot; × &quot; + video_height.__str__(), (0, 0, 0), font=font)
+draw.text((1 * margin + 1 * max_width, 50), u&#x27;时长：&#x27; + round(frames * 1.0 / fps, 3).__str__() + &quot; s&quot;, (0, 0, 0),
+          font=font)
+draw.text((3 * margin + 2 * max_width, 50), u&#x27;帧率：&#x27; + fps.__str__(), (0, 0, 0), font=font)
+draw.text((4 * margin + 3 * max_width, 50), u&#x27;帧计数：&#x27; + frames.__str__(), (0, 0, 0), font=font)
+
+for i in range(rows):
+    for j in range(cols):
+        result[margin + i * interval + i * max_height:margin + i * interval + i * max_height + max_height,
+        margin + j * interval + j * max_width:margin + j * interval + j * max_width + max_width] = \
+            images[i * 4 + j * 1]
+
+if width - 500 &lt;= 0:
+    loc_x = 0
+else:
+    loc_x = width - 500
+
+cv2.putText(result,
+            &quot;Created by video previewer written by Zhao Xuhui.&quot;,
+            (loc_x, height - 20),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            (0, 0, 0),
+            1,
+            cv2.LINE_AA)
+
+res = np.vstack([info, result])
+cv2.imwrite(out_path, res)
+
+t2 = time.time()
+
+print &quot;process...finished.&quot;
+print &quot;Total time cost:&quot;, round(t2 - t1, 2), &quot;s&quot;</code></pre>
 
 <p>批量调用程序 bash.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 读取目录下所有图片的路径，返回一个list</span><br><span class="line">def findAllVideos(root_dir):</span><br><span class="line">    paths = []</span><br><span class="line">    # 遍历</span><br><span class="line">    for parent, dirname, filenames in os.walk(root_dir):</span><br><span class="line">        for filename in filenames:</span><br><span class="line">            # 这里只选择了两种最常用的视频格式</span><br><span class="line">            if filename.endswith(&quot;.mp4&quot;) or filename.endswith(&quot;.avi&quot;) or filename.endswith(&quot;.MP4&quot;) or filename.endswith(&quot;.AVI&quot;):</span><br><span class="line">                paths.append(parent + &quot;\\&quot; + filename)</span><br><span class="line">    return paths</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 用户指定目录</span><br><span class="line">root_dir = raw_input(&quot;Input the parent path of videos:\n&quot;)</span><br><span class="line"></span><br><span class="line">paths = findAllVideos(root_dir)</span><br><span class="line"></span><br><span class="line">for i in range(paths.__len__()):</span><br><span class="line">    print &quot;Video&quot;, (i + 1), &quot;/&quot;, paths.__len__().__str__()</span><br><span class="line">    os.system(&quot;python preview_py2.py &quot; + &#x27;&quot;&#x27; + paths[i] + &#x27;&quot;&#x27; + &quot; 400 &quot; + (i + 1).__str__() + &quot;.jpg&quot;)</span><br><span class="line">    print &quot;\n&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext"># coding=utf-8
+import os
+
+
+# 读取目录下所有图片的路径，返回一个list
+def findAllVideos(root_dir):
+    paths = []
+    # 遍历
+    for parent, dirname, filenames in os.walk(root_dir):
+        for filename in filenames:
+            # 这里只选择了两种最常用的视频格式
+            if filename.endswith(&quot;.mp4&quot;) or filename.endswith(&quot;.avi&quot;) or filename.endswith(&quot;.MP4&quot;) or filename.endswith(&quot;.AVI&quot;):
+                paths.append(parent + &quot;\\&quot; + filename)
+    return paths
+
+
+# 用户指定目录
+root_dir = raw_input(&quot;Input the parent path of videos:\n&quot;)
+
+paths = findAllVideos(root_dir)
+
+for i in range(paths.__len__()):
+    print &quot;Video&quot;, (i + 1), &quot;/&quot;, paths.__len__().__str__()
+    os.system(&quot;python preview_py2.py &quot; + &#x27;&quot;&#x27; + paths[i] + &#x27;&quot;&#x27; + &quot; 400 &quot; + (i + 1).__str__() + &quot;.jpg&quot;)
+    print &quot;\n&quot;
+</code></pre>
 
 <p>在写程序的过程中，也学到了一些新的东西，这里简单地做一记录。</p>
 <p>0.总体思路<br>总体思路其实比较简单，就是利用OpenCV打开一个视频文件，然后获取总帧数。 再根据采样数(如取16张影像)，计算出每次采样的采样间隔。从而计算出待采样的16张影像的帧号。 利用OpenCV的VideoCapture类依次获取这些帧。 然后对帧画面进行缩放、并加上其对应的时间。 最后利用Numpy生成一个大的图像，将采样的这些影像放到指定位置，完成任务。</p>
