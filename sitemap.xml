@@ -2,36 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hexo.mtyxt.com/2023/05/29/Address/</loc>
+    <loc>https://hexo.mtyxt.com/2023/06/13/mattermost/</loc>
     
-    <lastmod>2023-05-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hexo.mtyxt.com/2023/05/29/test1/</loc>
-    
-    <lastmod>2023-05-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hexo.mtyxt.com/2023/05/26/test/</loc>
-    
-    <lastmod>2023-05-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hexo.mtyxt.com/2023/06/12/hello-world/</loc>
-    
-    <lastmod>2023-05-25</lastmod>
+    <lastmod>2023-06-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
