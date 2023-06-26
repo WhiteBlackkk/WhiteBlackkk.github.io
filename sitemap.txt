@@ -1,5 +1,5 @@
-https://hexo.mtyxt.com/2023/06/16/zerotrust/
-https://hexo.mtyxt.com/2023/06/13/mattermost/
-https://hexo.mtyxt.com/
-https://hexo.mtyxt.com/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/
-https://hexo.mtyxt.com/tags/Server/
+https://blog.mtyxt.com/2023/06/16/zerotrust/
+https://blog.mtyxt.com/2023/06/13/mattermost/
+https://blog.mtyxt.com/
+https://blog.mtyxt.com/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/
+https://blog.mtyxt.com/tags/Server/
